@@ -1286,8 +1286,8 @@ EngineRect.prototype.renderOnCanvas = function(params) {
                                      x + horLoopSize + scrollX, y,
                                      this.width - width, this.height);
         }
-
       } else {
+
         if ((this.width > 0) && (this.height > 0)) {
           params.canvasCtx.drawImage(image, this.spriteX, this.spriteY,
               this.width, this.height, x, y, this.width, this.height);

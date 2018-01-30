@@ -407,6 +407,7 @@ engine.readDebugParams = function() {
 
   var url = window.location.href;
 
+
   if (engine.debugAllowed) {
     if ((url.indexOf('?doodle-debug') != -1) ||
         (url.indexOf('&doodle-debug') != -1)) {
@@ -454,6 +455,7 @@ engine.readDebugParams = function() {
         }
       }
     }
+  engine.debug.showDebugPanel = true;
   }
 };
 
