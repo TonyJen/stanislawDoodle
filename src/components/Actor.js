@@ -58,11 +58,19 @@ class Actor extends React.Component {
   // implemented other methods from engine-actors.js
 
   render() {
-    // Converted the DOM manipulation code in the original engine into JSX
     return (
       <div>
         {/* implemented game elements rendered by the engine */}
-        {this.state.innerRects.map((rect, index) => <div key={index} style={{top: rect.top, left: rect.left, width: rect.width, height: rect.height}}></div>)}
+        {this.state.innerRects.map((rect, index) => (
+          <div
+            key={index}
+            style={{ top: rect.top, left: rect.left, width: rect.width, height: rect.height }}
+            onClick={this.onPageClick}
+            onMouseDown={this.onBodyMouseDown}
+            onMouseUp={this.onPageMouseUp}
+            onMouseMove={this.onMouseMove}
+          ></div>
+        ))}
       </div>
     );
   }
