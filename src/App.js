@@ -43,18 +43,6 @@ class App extends React.Component {
         </Router>
       </Provider>
     );
-  }
-}
-
-export default App;
-    return (
-      <div>
-        <EngineActor />
-        <EngineAction />
-        <EngineTransition />
-      </div>
-    );
-  }
-}
-
-export default App;
+    }
+    
+    export default App;
