@@ -15,41 +15,48 @@ class Engine extends React.Component {
     };
   }
 
+  import Rects from './Rects';
+  
+  // ...
+  
   onKeyUp(e) {
-    // ... implement method from engine-main.js
+    this.setState({ key: e.key });
   }
-
+  
   onPageClick(e) {
-    // ... implement method from engine-main.js
+    this.setState({ mouseX: e.clientX, mouseY: e.clientY });
   }
-
+  
   onBodyMouseDown(e) {
-    // ... implement method from engine-main.js
+    this.setState({ mouseDown: true });
   }
-
+  
   onPageMouseUp(e) {
-    // ... implement method from engine-main.js
+    this.setState({ mouseDown: false });
   }
-
+  
   onMouseMove(e) {
-    // ... implement method from engine-main.js
+    this.setState({ mouseX: e.clientX, mouseY: e.clientY });
   }
-
+  
   tick(params) {
-    // ... implement method from engine-actions.js
+    this.setState(prevState => ({ tickCount: prevState.tickCount + 1 }));
   }
-
+  
   lastTick() {
-    // ... implement method from engine-actions.js
+    this.setState(prevState => ({ tickCount: prevState.tickCount - 1 }));
   }
-
+  
   // ... other methods from engine-main.js and engine-actions.js
-
+  
   render() {
-    // Convert the DOM manipulation code in the original engine into JSX
+    const { rects } = this.state; // assuming rects is an array of objects with x, y, width, height, and color properties
+  
     return (
       <div>
-        {/* ... game elements rendered by the engine */}
+        {rects.map((rect, index) => (
+          <Rects key={index} {...rect} />
+        ))}
       </div>
     );
   }
