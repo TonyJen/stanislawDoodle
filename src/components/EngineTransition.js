@@ -23,29 +23,7 @@ class EngineTransition extends React.Component {
     };
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      type: 'ACTION_TYPE_TRANSITION',
-      prepared: false,
-      id: props.id,
-      actorId: props.actorId,
-      innerId: props.innerId,
-      startTime: props.startTime,
-      endTime: props.endTime,
-      properties: props.properties,
-      onFinish: props.onFinish,
-      align: props.align,
-      playCount: 0,
-      maxPlayCount: props.maxPlayCount || 1,
-      easing: props.easing || this.easeInOut,
-      alternate: props.alternate,
-      clearOnFinish: !!props.clearOnFinish,
-    };
-
-    this.tick = this.tick.bind(this);
-    this.lastTick = this.lastTick.bind(this);
-  }
+  
 
   prepare() {
     // Set start values, end values, and value ranges for each property
