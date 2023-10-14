@@ -1,8 +1,10 @@
 import React from 'react';
+import EngineHelpers from './EngineHelpers';
 
 class Engine extends React.Component {
   constructor(props) {
     super(props);
+    this.engineHelpers = new EngineHelpers();
     this.state = {
       mouseX: 0,
       mouseY: 0,
@@ -18,6 +20,36 @@ class Engine extends React.Component {
   import Rects from './Rects';
   
   // ...
+  
+  onKeyUp(e) {
+    this.setState({ key: e.key });
+  }
+  
+  onPageClick(e) {
+    this.setState({ mouseX: e.clientX, mouseY: e.clientY });
+  }
+  
+  onBodyMouseDown(e) {
+    this.setState({ mouseDown: true });
+  }
+  
+  onPageMouseUp(e) {
+    this.setState({ mouseDown: false });
+  }
+  
+  onMouseMove(e) {
+    this.setState({ mouseX: e.clientX, mouseY: e.clientY });
+  }
+  
+  tick(params) {
+    this.setState(prevState => ({ tickCount: prevState.tickCount + 1 }));
+  }
+  
+  lastTick() {
+    this.setState(prevState => ({ tickCount: prevState.tickCount - 1 }));
+  }
+  
+  // ... other methods from engine-main.js and engine-actions.js
   
   onKeyUp(e) {
     this.setState({ key: e.key });
