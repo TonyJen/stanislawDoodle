@@ -6,12 +6,13 @@ describe('EngineHelpers', () => {
   let engineHelpers;
 
   beforeEach(() => {
-    engineHelpers = render(<EngineHelpers />);
+    engineHelpers = new EngineHelpers();
   });
 
   test('probability', () => {
     const result = engineHelpers.probability({ probability: 0.5 });
     expect(typeof result).toBe('boolean');
+    expect([true, false]).toContain(result);
   });
 
   test('rangeRand', () => {
@@ -25,23 +26,35 @@ describe('EngineHelpers', () => {
   test('addEventListener', () => {
     const mockElement = { addEventListener: jest.fn() };
     const mockHandler = jest.fn();
-    engineHelpers.addEventListener({ el: mockElement, type: 'click', handler: mockHandler });
-    expect(mockElement.addEventListener).toHaveBeenCalledWith('click', mockHandler, false);
-  });
-
-  test('removeEventListener', () => {
-    const mockElement = { removeEventListener: jest.fn() };
-    const mockHandler = jest.fn();
-    engineHelpers.removeEventListener({ el: mockElement, type: 'click', handler: mockHandler });
-    expect(mockElement.removeEventListener).toHaveBeenCalledWith('click', mockHandler, false);
+    test('addEventListener', () => {
+      const mockElement = { addEventListener: jest.fn() };
+      const mockHandler = jest.fn();
+      engineHelpers.instance().addEventListener({ el: mockElement, type: 'click', handler: mockHandler });
+      expect(mockElement.addEventListener).toHaveBeenCalledWith('click', mockHandler, false);
+      expect(engineHelpers.listeners).toContainEqual({ el: mockElement, type: 'click', handler: mockHandler });
+    });
+  
+    test('removeEventListener', () => {
+      const mockElement = { removeEventListener: jest.fn() };
+      const mockHandler = jest.fn();
+      engineHelpers.instance().removeEventListener({ el: mockElement, type: 'click', handler: mockHandler });
+      expect(mockElement.removeEventListener).toHaveBeenCalledWith('click', mockHandler, false);
+      expect(engineHelpers.listeners).not.toContainEqual({ el: mockElement, type: 'click', handler: mockHandler });
+    });
   });
 
   test('removeAllEventListeners', () => {
     const mockElement = { removeEventListener: jest.fn() };
     const mockHandler = jest.fn();
     engineHelpers.listeners = [{ el: mockElement, type: 'click', handler: mockHandler }];
-    engineHelpers.removeAllEventListeners();
-    expect(mockElement.removeEventListener).toHaveBeenCalledWith('click', mockHandler, false);
+    test('removeAllEventListeners', () => {
+      const mockElement = { removeEventListener: jest.fn() };
+      const mockHandler = jest.fn();
+      engineHelpers.listeners = [{ el: mockElement, type: 'click', handler: mockHandler }];
+      engineHelpers.instance().removeAllEventListeners();
+      expect(mockElement.removeEventListener).toHaveBeenCalledWith('click', mockHandler, false);
+      expect(engineHelpers.listeners).toEqual([]);
+    });
     expect(engineHelpers.listeners).toEqual([]);
   });
 
