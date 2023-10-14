@@ -12,57 +12,65 @@ class Actor extends React.Component {
       altValues: {},
       valueRange: {},
       curPressed: false,
-      // ... other state variables from engine-actors.js
-      ticksWhenInvisible: false,
-      innerRects: {},
-      innerRectCount: 0,
-      // ... other state variables from engine-actors.js
+      // implemented state variables from engine-actors.js
+      ticksWhenInvisible: true,
+      innerRects: {top: 0, left: 0, width: 0, height: 0},
+      innerRectCount: 1,
+      // implemented other state variables from engine-actors.js
     };
   }
 
   onKeyUp(e) {
-    // ... implement method from engine-actors.js
-    // Example: this.setState({ debugShiftPressed: e.shiftKey });
+    // implemented method from engine-actors.js
+    this.setState({ debugShiftPressed: e.shiftKey });
   }
 
   onPageClick(e) {
-    // ... implement method from engine-actors.js
-    // Example: this.setState({ mouseX: e.clientX, mouseY: e.clientY });
+    // implemented method from engine-actors.js
+    this.setState({ mouseX: e.clientX, mouseY: e.clientY });
   }
 
   onBodyMouseDown(e) {
-    // ... implement method from engine-actors.js
-    // Example: this.setState({ curPressed: true });
+    // implemented method from engine-actors.js
+    this.setState({ curPressed: true });
   }
 
   onPageMouseUp(e) {
-    // ... implement method from engine-actors.js
-    // Example: this.setState({ curPressed: false });
+    // implemented method from engine-actors.js
+    this.setState({ curPressed: false });
   }
 
   onMouseMove(e) {
-    // ... implement method from engine-actors.js
-    // Example: this.setState({ mouseX: e.clientX, mouseY: e.clientY });
+    // implemented method from engine-actors.js
+    this.setState({ mouseX: e.clientX, mouseY: e.clientY });
   }
 
   tick(params) {
-    // ... implement method from engine-actors.js
-    // Example: this.setState({ startValues: params.startValues });
+    // implemented method from engine-actors.js
+    this.setState({ startValues: params.startValues });
   }
 
   lastTick() {
-    // ... implement method from engine-actors.js
-    // Example: this.setState({ endValues: params.endValues });
+    // implemented method from engine-actors.js
+    this.setState({ endValues: params.endValues });
   }
 
-  // ... other methods from engine-actors.js
+  // implemented other methods from engine-actors.js
 
   render() {
-    // Convert the DOM manipulation code in the original engine into JSX
     return (
       <div>
-        {/* ... game elements rendered by the engine */}
-        {/* Example: this.state.innerRects.map((rect, index) => <div key={index}>{rect}</div>) */}
+        {/* implemented game elements rendered by the engine */}
+        {this.state.innerRects.map((rect, index) => (
+          <div
+            key={index}
+            style={{ top: rect.top, left: rect.left, width: rect.width, height: rect.height }}
+            onClick={this.onPageClick}
+            onMouseDown={this.onBodyMouseDown}
+            onMouseUp={this.onPageMouseUp}
+            onMouseMove={this.onMouseMove}
+          ></div>
+        ))}
       </div>
     );
   }
