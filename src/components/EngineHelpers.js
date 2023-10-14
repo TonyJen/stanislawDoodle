@@ -3,11 +3,13 @@ import React from 'react';
 class EngineHelpers extends React.Component {
   constructor(props) {
     super(props);
+    this.listeners = [];
   }
 
   probability(params) {
     return Math.random() < params.probability;
   }
+}
 
   rangeRand(params) {
     return Math.random() * (params.max - params.min) + params.min;
