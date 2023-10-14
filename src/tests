@@ -1,0 +1,110 @@
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import EngineActor from '../components/EngineActor';
+
+describe('EngineActor', () => {
+  it('renders correctly', () => {
+    const { getByTestId } = render(<EngineActor id="testActor" />);
+    expect(getByTestId('engine-actor')).toBeInTheDocument();
+  });
+
+  it('tests addMainInnerRect method', () => {
+    const addMainInnerRect = jest.spyOn(EngineActor.prototype, 'addMainInnerRect');
+    const wrapper = shallow(<EngineActor id="testActor" />);
+    wrapper.instance().addMainInnerRect();
+    expect(addMainInnerRect).toHaveBeenCalled();
+  });
+
+  it('tests addInnerRects method', () => {
+    const addInnerRects = jest.spyOn(EngineActor.prototype, 'addInnerRects');
+    const wrapper = shallow(<EngineActor id="testActor" />);
+    wrapper.instance().addInnerRects();
+    expect(addInnerRects).toHaveBeenCalled();
+  });
+
+  it('tests getRect method', () => {
+    const getRect = jest.spyOn(EngineActor.prototype, 'getRect');
+    const wrapper = shallow(<EngineActor id="testActor" />);
+    wrapper.instance().getRect();
+    expect(getRect).toHaveBeenCalled();
+  });
+
+  it('tests setRender method', () => {
+    const setRender = jest.spyOn(EngineActor.prototype, 'setRender');
+    const wrapper = shallow(<EngineActor id="testActor" />);
+    wrapper.instance().setRender();
+    expect(setRender).toHaveBeenCalled();
+  });
+
+  it('tests setState method', () => {
+    const setState = jest.spyOn(EngineActor.prototype, 'setState');
+    const wrapper = shallow(<EngineActor id="testActor" />);
+    wrapper.instance().setState();
+    expect(setState).toHaveBeenCalled();
+  });
+
+  it('tests setVisible method', () => {
+    const setVisible = jest.spyOn(EngineActor.prototype, 'setVisible');
+    const wrapper = shallow(<EngineActor id="testActor" />);
+    wrapper.instance().setVisible();
+    expect(setVisible).toHaveBeenCalled();
+  });
+});
+```
+</new_file>
+
+<new_file file_path="src/tests/EngineAction.test.js">
+```jsx
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import EngineAction from '../components/EngineAction';
+
+describe('EngineAction', () => {
+  it('renders correctly', () => {
+    const { getByTestId } = render(<EngineAction startTime={0} endTime={1000} onAction={() => {}} />);
+    expect(getByTestId('engine-action')).toBeInTheDocument();
+  });
+
+  it('tests tick method', () => {
+    const onAction = jest.fn();
+    const wrapper = shallow(<EngineAction startTime={0} endTime={1000} onAction={onAction} />);
+    wrapper.instance().tick();
+    expect(onAction).toHaveBeenCalled();
+  });
+});
+```
+</new_file>
+
+<new_file file_path="src/tests/EngineTransition.test.js">
+```jsx
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import EngineTransition from '../components/EngineTransition';
+
+describe('EngineTransition', () => {
+  it('renders correctly', () => {
+    const { getByTestId } = render(<EngineTransition id="testTransition" />);
+    expect(getByTestId('engine-transition')).toBeInTheDocument();
+  });
+
+  it('tests prepare method', () => {
+    const prepare = jest.spyOn(EngineTransition.prototype, 'prepare');
+    const wrapper = shallow(<EngineTransition id="testTransition" />);
+    wrapper.instance().prepare();
+    expect(prepare).toHaveBeenCalled();
+  });
+  
+  it('tests tick method', () => {
+    const tick = jest.spyOn(EngineTransition.prototype, 'tick');
+    const wrapper = shallow(<EngineTransition id="testTransition" />);
+    wrapper.instance().tick();
+    expect(tick).toHaveBeenCalled();
+  });
+  
+  it('tests lastTick method', () => {
+    const lastTick = jest.spyOn(EngineTransition.prototype, 'lastTick');
+    const wrapper = shallow(<EngineTransition id="testTransition" />);
+    wrapper.instance().lastTick();
+    expect(lastTick).toHaveBeenCalled();
+  });
+});
