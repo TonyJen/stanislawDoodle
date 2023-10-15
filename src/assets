@@ -1,0 +1,19 @@
+const fs = require('fs');
+const path = require('path');
+
+const directoryPath = path.join(__dirname, 'src/assets');
+
+const files = fs.readdirSync(directoryPath);
+
+files.forEach(file => {
+    const filePath = path.join(directoryPath, file);
+    let fileContent = fs.readFileSync(filePath, 'utf8');
+
+    // Regular expression to match single line and multi-line commented out code
+    const regex = /\/\/.*$|\/\*[\s\S]*?\*\//gm;
+
+    // Remove commented out code
+    fileContent = fileContent.replace(regex, '');
+
+    fs.writeFileSync(filePath, fileContent);
+});
