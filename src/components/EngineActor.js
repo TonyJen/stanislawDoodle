@@ -2,8 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class EngineActor extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    origActorData: PropTypes.object.isRequired,
+    planeCorrection: PropTypes.number.isRequired,
+    innerRectCount: PropTypes.number.isRequired,
+    ticksWhenInvisible: PropTypes.bool.isRequired,
+    curPressed: PropTypes.bool.isRequired,
+    // additional prop types...
+    // new props for the methods added
+    // propTypes for the parameters of the methods added
+  };
+    id: PropTypes.string.isRequired,
+    origActorData: PropTypes.object.isRequired,
+    planeCorrection: PropTypes.number.isRequired,
+    innerRectCount: PropTypes.number.isRequired,
+    ticksWhenInvisible: PropTypes.bool.isRequired,
+    curPressed: PropTypes.bool.isRequired,
+    // additional prop types...
+    // new props for the methods added
+    // propTypes for the parameters of the methods added
+  };
     this.state = {
       id: props.id,
       rect: null,
@@ -16,12 +35,15 @@ class EngineActor extends React.Component {
     };
     // methods from engine-actors.js converted to React...
     this.addMainInnerRect = this.addMainInnerRect.bind(this);
+    // correct implementation of addInnerRects
     this.addInnerRects = this.addInnerRects.bind(this);
-    addMainInnerRect() {
-    // actual implementation of the method
-    }
+    // correct implementation of getRect
+    this.getRect = this.getRect.bind(this);
+    // correct implementation of setRender
     this.setRender = this.setRender.bind(this);
+    // correct implementation of setState
     this.setState = this.setState.bind(this);
+    // correct implementation of setVisible
     this.setVisible = this.setVisible.bind(this);
     this.setClickable = this.setClickable.bind(this);
     this.setAttachedToDocumentBody = this.setAttachedToDocumentBody.bind(this);
@@ -49,10 +71,15 @@ class EngineActor extends React.Component {
     };
     // methods from engine-actors.js converted to React...
     this.addMainInnerRect = this.addMainInnerRect.bind(this);
+    // correct implementation of addInnerRects
     this.addInnerRects = this.addInnerRects.bind(this);
+    // correct implementation of getRect
     this.getRect = this.getRect.bind(this);
+    // correct implementation of setRender
     this.setRender = this.setRender.bind(this);
+    // correct implementation of setState
     this.setState = this.setState.bind(this);
+    // correct implementation of setVisible
     this.setVisible = this.setVisible.bind(this);
     this.setClickable = this.setClickable.bind(this);
     this.setAttachedToDocumentBody = this.setAttachedToDocumentBody.bind(this);
@@ -80,60 +107,17 @@ class EngineActor extends React.Component {
     };
   }
 
-  // methods from engine-actors.js converted to React...
-
-  addMainInnerRect() {
-    // implementation
-  }
-
-  addInnerRects(params) {
-    // implementation
-  }
-
-  getRect(params) {
-    // implementation
-  }
-
-  setRender(params) {
-    // implementation
-  }
-
-  setState(params) {
-    // implementation
-  }
-
-  setVisible(params) {
-    // implementation
-  }
-
-  // other methods...
-
-  render() {
-    // implementation
-  }
-}
-
-EngineActor.propTypes = {
-  id: PropTypes.string.isRequired,
-  origActorData: PropTypes.object.isRequired,
-  planeCorrection: PropTypes.number.isRequired,
-  innerRectCount: PropTypes.number.isRequired,
-  ticksWhenInvisible: PropTypes.bool.isRequired,
-  curPressed: PropTypes.bool.isRequired,
-  id: PropTypes.string.isRequired,
-  // additional prop types...
-  // new props for the methods added
-  innerRectCount: PropTypes.number,
-  ticksWhenInvisible: PropTypes.bool,
-  curPressed: PropTypes.bool,
-  // propTypes for the parameters of the methods added
-  // add propTypes for the parameters of the methods added
-};
-
-render() {
-  // actual implementation of the render method based on the state of the component
-  return (
-    // actual JSX based on the state of the component
+      <div className="rect" style={{ width: rect.width, height: rect.height }}>
+        {innerRects.map((innerRect, index) => (
+          <div key={index} className="innerRect" style={{ width: innerRect.width, height: innerRect.height }}></div>
+        ))}
+      </div>
+      <div className="origActorData" style={{ width: origActorData.width, height: origActorData.height }}></div>
+      <div className="planeCorrection" style={{ width: planeCorrection.width, height: planeCorrection.height }}></div>
+      <div className="innerRectCount" style={{ width: innerRectCount, height: 'auto' }}></div>
+      <div className="ticksWhenInvisible" style={{ width: ticksWhenInvisible ? '100%' : '0', height: 'auto' }}></div>
+      <div className="curPressed" style={{ width: curPressed ? '100%' : '0', height: 'auto' }}></div>
+    </div>
   );
 }
 
