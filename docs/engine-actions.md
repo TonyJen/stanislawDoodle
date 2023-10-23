@@ -1,6 +1,7 @@
 file_path: "docs/engine-actions.md"
 file_content: 
 '''
+# Engine Actions Documentation
 # Engine Actions
 
 The `engine-actions.js` file is a part of a doodle game engine. It contains the definitions for `EngineAction` and `EngineTransition` classes which are used to create actions and transitions in the game.
