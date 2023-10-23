@@ -4,14 +4,7 @@ import PropTypes from 'prop-types';
 class EngineActor extends React.Component {
   static propTypes = {
     curPressed: PropTypes.bool.isRequired,
-    origActorData: PropTypes.object.isRequired,
-    planeCorrection: PropTypes.number.isRequired,
-    innerRectCount: PropTypes.number.isRequired,
-    ticksWhenInvisible: PropTypes.bool.isRequired,
-    curPressed: PropTypes.bool.isRequired,
-    // additional prop types...
-  };
-  this.state = {
+    this.state = {
       id: props.id,
       rect: null,
       innerRects: {},
@@ -137,8 +130,6 @@ class EngineActor extends React.Component {
         speed: engine.BUTTON_PRESS_ANIMATION_SPEED, count: 1,
         imageIds: params.imageIds });
     }.bind(this);
-      // implementation...
-    }.bind(this);
     // other methods...
       innerRectCount: 0,
       ticksWhenInvisible: false,
@@ -147,16 +138,16 @@ class EngineActor extends React.Component {
     };
   }
 
-      <div className="rect" style={{ width: rect.width, height: rect.height }}>
-        {innerRects.map((innerRect, index) => (
+      <div className="rect" style={{ width: this.state.rect.width, height: this.state.rect.height }}>
+        {Object.values(this.state.innerRects).map((innerRect, index) => (
           <div key={index} className="innerRect" style={{ width: innerRect.width, height: innerRect.height }}></div>
         ))}
       </div>
-      <div className="origActorData" style={{ width: origActorData.width, height: origActorData.height }}></div>
-      <div className="planeCorrection" style={{ width: planeCorrection.width, height: planeCorrection.height }}></div>
-      <div className="innerRectCount" style={{ width: innerRectCount, height: 'auto' }}></div>
-      <div className="ticksWhenInvisible" style={{ width: ticksWhenInvisible ? '100%' : '0', height: 'auto' }}></div>
-      <div className="curPressed" style={{ width: curPressed ? '100%' : '0', height: 'auto' }}></div>
+      <div className="origActorData" style={{ width: this.state.origActorData.width, height: this.state.origActorData.height }}></div>
+      <div className="planeCorrection" style={{ width: this.state.planeCorrection.width, height: this.state.planeCorrection.height }}></div>
+      <div className="innerRectCount" style={{ width: this.state.innerRectCount, height: 'auto' }}></div>
+      <div className="ticksWhenInvisible" style={{ width: this.state.ticksWhenInvisible ? '100%' : '0', height: 'auto' }}></div>
+      <div className="curPressed" style={{ width: this.state.curPressed ? '100%' : '0', height: 'auto' }}></div>
     </div>
   );
   
