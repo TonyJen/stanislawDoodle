@@ -1,12 +1,12 @@
 file_path: "docs/engine-actions.md"
 file_content: 
 '''
-# Documentation for Engine Actions and Transitions in Doodle Game Engine
-### Engine Actions
+# Engine Actions and Transitions Documentation
+## Engine Actions
 
 The `engine-actions.js` file is a part of a doodle game engine. It contains the definitions for `EngineAction` and `EngineTransition` classes which are used to create actions and transitions in the game.
 
-## EngineAction Class
+### EngineAction Class
 
 The `EngineAction` class is used to create an action which is something that happens one time or every tick during a specific time span. It has the following properties:
 
