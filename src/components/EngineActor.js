@@ -1,18 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class EngineActor extends React.Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    origActorData: PropTypes.object.isRequired,
-    planeCorrection: PropTypes.number.isRequired,
-    innerRectCount: PropTypes.number.isRequired,
-    ticksWhenInvisible: PropTypes.bool.isRequired,
     curPressed: PropTypes.bool.isRequired,
-    // additional prop types...
-    // new props for the methods added
-    // propTypes for the parameters of the methods added
-  };
     this.state = {
       id: props.id,
       rect: null,
@@ -23,74 +14,122 @@ class EngineActor extends React.Component {
       ticksWhenInvisible: props.ticksWhenInvisible,
       curPressed: props.curPressed,
     };
+    
     // methods from engine-actors.js converted to React...
-    this.addMainInnerRect = this.addMainInnerRect.bind(this);
-    // addMainInnerRect: Adds the main inner rectangle to the component. The rectangle is stored in the 'rect' state variable. This method takes the width and height of the rectangle as parameters.
-    // addInnerRects: Adds the specified number of inner rectangles to the main rectangle. The rectangles are stored in the 'innerRects' state variable. This method takes the number of rectangles to add as a parameter.
-    // getRect: Returns the main rectangle of the component. The rectangle is retrieved from the 'rect' state variable. This method does not take any parameters.
-    // setRender: Sets the render state of the component based on the given parameter. The new render state is stored in the 'render' state variable. This method takes a boolean value as a parameter.
-    // setState: Updates the state of the component based on the given parameter. This method is used to update any state variable of the component. This method takes an object containing the new state values as a parameter.
-    // setVisible: Sets the visibility of the component based on the given parameter. The new visibility state is stored in the 'visible' state variable. This method takes a boolean value as a parameter.
-    this.setRender = this.setRender.bind(this);
-    // setState: Updates the state of the component
-    this.setState = this.setState.bind(this);
-    // setVisible: Sets the visibility of the component
-    this.setVisible = this.setVisible.bind(this);
-    this.setClickable = this.setClickable.bind(this);
-    this.setAttachedToDocumentBody = this.setAttachedToDocumentBody.bind(this);
-    this.showAnimation = this.showAnimation.bind(this);
-    this.showImage = this.showImage.bind(this);
-    this.showBlack = this.showBlack.bind(this);
-    this.showWhite = this.showWhite.bind(this);
-    this.clear = this.clear.bind(this);
-    this.addTransition = this.addTransition.bind(this);
-    this.transform = this.transform.bind(this);
-    this.update = this.update.bind(this);
-    this.onClickableMouseOver = this.onClickableMouseOver.bind(this);
-    this.onClickableMouseOut = this.onClickableMouseOut.bind(this);
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
-    this.onMouseClick = this.onMouseClick.bind(this);
-    this.turnIntoButton = this.turnIntoButton.bind(this);
-    this.pressButton = this.pressButton.bind(this);
-    this.unpressButton = this.unpressButton.bind(this);
-    // other methods...
-      innerRectCount: 0,
-      ticksWhenInvisible: false,
-      curPressed: false,
-      // additional state variables...
-    };
-    // methods from engine-actors.js converted to React...
-    this.addMainInnerRect = this.addMainInnerRect.bind(this);
-    // addMainInnerRect: Adds the main inner rectangle to the component. The rectangle is stored in the 'rect' state variable. This method takes the width and height of the rectangle as parameters.
-    // addInnerRects: Adds the specified number of inner rectangles to the main rectangle. The rectangles are stored in the 'innerRects' state variable. This method takes the number of rectangles to add as a parameter.
-    // getRect: Returns the main rectangle of the component. The rectangle is retrieved from the 'rect' state variable. This method does not take any parameters.
-    // setRender: Sets the render state of the component based on the given parameter. The new render state is stored in the 'render' state variable. This method takes a boolean value as a parameter.
-    // setState: Updates the state of the component based on the given parameter. This method is used to update any state variable of the component. This method takes an object containing the new state values as a parameter.
-    // setVisible: Sets the visibility of the component based on the given parameter. The new visibility state is stored in the 'visible' state variable. This method takes a boolean value as a parameter.
-    this.setRender = this.setRender.bind(this);
-    // setState: Updates the state of the component
-    this.setState = this.setState.bind(this);
-    // setVisible: Sets the visibility of the component
-    this.setVisible = this.setVisible.bind(this);
-    this.setClickable = this.setClickable.bind(this);
-    this.setAttachedToDocumentBody = this.setAttachedToDocumentBody.bind(this);
-    this.showAnimation = this.showAnimation.bind(this);
-    this.showImage = this.showImage.bind(this);
-    this.showBlack = this.showBlack.bind(this);
-    this.showWhite = this.showWhite.bind(this);
-    this.clear = this.clear.bind(this);
-    this.addTransition = this.addTransition.bind(this);
-    this.transform = this.transform.bind(this);
-    this.update = this.update.bind(this);
-    this.onClickableMouseOver = this.onClickableMouseOver.bind(this);
-    this.onClickableMouseOut = this.onClickableMouseOut.bind(this);
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
-    this.onMouseClick = this.onMouseClick.bind(this);
-    this.turnIntoButton = this.turnIntoButton.bind(this);
-    this.pressButton = this.pressButton.bind(this);
-    this.unpressButton = this.unpressButton.bind(this);
+    this.addMainInnerRect = function() {
+      const origActorData = this.state.origActorData;
+      const innerRectsData = {};
+      innerRectsData[engine.MAIN_RECT_ID] = {
+          x: 0, y: 0,
+          width: origActorData.WIDTH, height: origActorData.HEIGHT,
+          clampRotate: origActorData.CLAMP_ROTATE
+      };
+      this.addInnerRects({ innerRectsData: innerRectsData });
+    }.bind(this);
+    this.addInnerRects = function(params) {
+      for (let id in params.innerRectsData) {
+        let innerRectData = params.innerRectsData[id];
+        let innerCount = id === engine.MAIN_RECT_ID ? -1 : this.state.innerRectCount++;
+        this.setState(prevState => {
+          prevState.innerRects[id] = new EngineRect({
+            actor: this, id: this.id,
+            innerId: id,
+            innerCount: innerCount,
+            forceRenderDom: innerRectData.forceRenderDom,
+            horLoopSize: innerRectData.horLoopSize });
+          innerRectData.visible = true;
+          prevState.innerRects[id].transform(innerRectData);
+          return prevState;
+        });
+      }
+    }.bind(this);
+    this.unpressButton = function(params) {
+      if (this.state.curPressed) {
+        let speed = engine.BUTTON_UNPRESS_ANIMATION_SPEED;
+        if (engine.features.touch) {
+          speed *= 3;
+        }
+        this.showAnimation({
+          innerId: params.innerId, speed: speed, count: 1,
+          imageIds: params.imageIds });
+      }
+    }.bind(this);
+    this.update = function(params) {
+      this.rect.update();
+      if (params && params.allInnerRects) {
+        for (var i in this.innerRects) {
+          this.innerRects[i].update();
+        }
+      }
+    }.bind(this);
+    this.onClickableMouseOver = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      engine.interaction();
+      if (engine.customMousePointer) {
+        engine.setEmptyCssCursor({ el: event.targetEl });
+        $a('mouse-pointer').setState({ state: 'hover' });
+      } else {
+        event.targetEl.style.cursor = 'pointer';
+      }
+    }.bind(this);
+    this.onClickableMouseOut = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      engine.interaction();
+      if (this.curPressed && event.targetEl.rect.clickableEl.onMouseUpHandler) {
+        event.targetEl.rect.clickableEl.onMouseUpHandler();
+      }
+      this.curPressed = false;
+      if (engine.customMousePointer) {
+        $a('mouse-pointer').setState({ state: 'normal' });
+      }
+    }.bind(this);
+    this.onMouseDown = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      if (event.targetEl.onMouseDownHandler) {
+        engine.interaction({ meaningful: true });
+        event.targetEl.onMouseDownHandler(event);
+      }
+      this.curPressed = true;
+    }.bind(this);
+    this.onMouseUp = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      if (event.targetEl.onMouseUpHandler) {
+        event.targetEl.onMouseUpHandler(event);
+      }
+    }.bind(this);
+    this.onMouseClick = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      if (this.curPressed) {
+        engine.interaction({ meaningful: true });
+        this.onClick({ innerId: event.targetEl.innerId });
+        this.curPressed = false;
+        engine.preventDefaultEvent({ event: event });
+        engine.stopPropagationEvent({ event: event });
+      }
+    }.bind(this);
+    this.turnIntoButton = function(params) {
+      this.setClickable({
+          innerId: params.innerId,
+          clickable: params.clickable,
+          noPadding: params.noPadding,
+          onMouseDown: engine.bind(
+              function() {
+                this.pressButton({ innerId: params.innerId,
+                                   imageIds: params.pressAnimImageIds }) },
+              this),
+          onMouseUp: engine.bind(
+              function() {
+                this.unpressButton({ innerId: params.innerId,
+                                     imageIds: params.unpressAnimImageIds }) },
+              this)
+      });
+    }.bind(this);
+    this.pressButton = function(params) {
+      this.showAnimation({
+        innerId: params.innerId,
+        speed: engine.BUTTON_PRESS_ANIMATION_SPEED, count: 1,
+        imageIds: params.imageIds });
+    }.bind(this);
     // other methods...
       innerRectCount: 0,
       ticksWhenInvisible: false,
@@ -111,6 +150,6 @@ class EngineActor extends React.Component {
       <div className="curPressed" style={{ width: this.state.curPressed ? '100%' : '0', height: 'auto' }}></div>
     </div>
   );
-}
-
-export default EngineActor;
+  
+  export default EngineActor;
+  \n
