@@ -84,17 +84,12 @@ class EngineAction extends React.Component {
   }
   
   // Removed duplicate propTypes declaration
-  // EngineAction.propTypes = {
-  //   startTime: PropTypes.number.isRequired,
-  //   endTime: PropTypes.number.isRequired,
-  //   onAction: PropTypes.func.isRequired,
-  // };
 }
 
-// Removed duplicate propTypes declaration
-  startTime: PropTypes.number.isRequired,
-  endTime: PropTypes.number.isRequired,
-  onAction: PropTypes.func.isRequired,
-};
+// EngineAction.propTypes = {
+//   startTime: PropTypes.number.isRequired,
+//   endTime: PropTypes.number.isRequired,
+//   onAction: PropTypes.func.isRequired,
+// };
 
 export default EngineAction;
