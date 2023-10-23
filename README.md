@@ -4,7 +4,7 @@ Google Stanislaw Doodle Project
 This project is a React-based application that provides an interactive game experience. It leverages the performance and maintainability benefits offered by modern JavaScript frameworks like React.
 
 ## Component Hierarchy
-The application is broken down into reusable React components. The main components include `EngineActor`, `EngineAction`, and `EngineTransition`. These components handle the game's actors, actions, and transitions respectively.
+The application is broken down into reusable React components. The main components include `EngineActor`, `EngineAction`, `EngineTransition`, and `EngineConst`. These components handle the game's actors, actions, transitions, and various constants used in the game engine respectively.
 
 ## State Management
 The application's global state is managed using Redux. The state includes actors, actions, and transitions which are handled by their respective reducers.
