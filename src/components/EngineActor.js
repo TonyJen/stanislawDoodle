@@ -40,67 +40,19 @@ class EngineActor extends React.Component {
       ticksWhenInvisible: props.ticksWhenInvisible,
       curPressed: props.curPressed,
     };
+    
     // methods from engine-actors.js converted to React...
-    this.addMainInnerRect = this.addMainInnerRect.bind(this);
-    this.addInnerRects = this.addInnerRects.bind(this);
-    this.getRect = this.getRect.bind(this);
-    this.setRender = this.setRender.bind(this);
-    this.setState = this.setState.bind(this);
-    this.setVisible = this.setVisible.bind(this);
-    this.setClickable = this.setClickable.bind(this);
-    this.setAttachedToDocumentBody = this.setAttachedToDocumentBody.bind(this);
-    this.showAnimation = this.showAnimation.bind(this);
-    this.showImage = this.showImage.bind(this);
-    this.showBlack = this.showBlack.bind(this);
-    this.showWhite = this.showWhite.bind(this);
-    this.clear = this.clear.bind(this);
-    this.addTransition = this.addTransition.bind(this);
-    this.transform = this.transform.bind(this);
-    this.update = this.update.bind(this);
-    this.onClickableMouseOver = this.onClickableMouseOver.bind(this);
-    this.onClickableMouseOut = this.onClickableMouseOut.bind(this);
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
-    this.onMouseClick = this.onMouseClick.bind(this);
-    this.turnIntoButton = this.turnIntoButton.bind(this);
-    this.pressButton = this.pressButton.bind(this);
-    this.unpressButton = this.unpressButton.bind(this);
-    // other methods...
-      innerRectCount: 0,
-      ticksWhenInvisible: false,
-      curPressed: false,
-      // additional state variables...
-    };
-    // methods from engine-actors.js converted to React...
-    this.addMainInnerRect = this.addMainInnerRect.bind(this);
-    // correct implementation of addInnerRects
-    this.addInnerRects = this.addInnerRects.bind(this);
-    // correct implementation of getRect
-    this.getRect = this.getRect.bind(this);
-    // correct implementation of setRender
-    this.setRender = this.setRender.bind(this);
-    // correct implementation of setState
-    this.setState = this.setState.bind(this);
-    // correct implementation of setVisible
-    this.setVisible = this.setVisible.bind(this);
-    this.setClickable = this.setClickable.bind(this);
-    this.setAttachedToDocumentBody = this.setAttachedToDocumentBody.bind(this);
-    this.showAnimation = this.showAnimation.bind(this);
-    this.showImage = this.showImage.bind(this);
-    this.showBlack = this.showBlack.bind(this);
-    this.showWhite = this.showWhite.bind(this);
-    this.clear = this.clear.bind(this);
-    this.addTransition = this.addTransition.bind(this);
-    this.transform = this.transform.bind(this);
-    this.update = this.update.bind(this);
-    this.onClickableMouseOver = this.onClickableMouseOver.bind(this);
-    this.onClickableMouseOut = this.onClickableMouseOut.bind(this);
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
-    this.onMouseClick = this.onMouseClick.bind(this);
-    this.turnIntoButton = this.turnIntoButton.bind(this);
-    this.pressButton = this.pressButton.bind(this);
-    this.unpressButton = this.unpressButton.bind(this);
+    this.addMainInnerRect = function() {
+      // Here goes the actual implementation of addMainInnerRect
+    }.bind(this);
+    this.addInnerRects = function() {
+      // Here goes the actual implementation of addInnerRects
+    }.bind(this);
+    this.unpressButton = function() {
+      // Here goes the actual implementation of unpressButton
+    }.bind(this);
+      // implementation...
+    }.bind(this);
     // other methods...
       innerRectCount: 0,
       ticksWhenInvisible: false,
