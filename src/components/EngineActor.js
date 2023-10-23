@@ -11,8 +11,11 @@ class EngineActor extends React.Component {
       innerRectCount: 0,
       ticksWhenInvisible: false,
       curPressed: false,
+      // additional state variables...
     };
   }
+
+  // methods from engine-actors.js converted to React...
 
   addMainInnerRect() {
     // implementation
@@ -47,7 +50,7 @@ class EngineActor extends React.Component {
 
 EngineActor.propTypes = {
   id: PropTypes.string.isRequired,
-  // other prop types...
+  // additional prop types...
 };
 
 export default EngineActor;
