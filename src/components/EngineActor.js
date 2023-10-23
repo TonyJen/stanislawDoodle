@@ -20,17 +20,7 @@ class EngineActor extends React.Component {
     pressButton: PropTypes.func.isRequired,
     unpressButton: PropTypes.func.isRequired,
   };
-    id: PropTypes.string.isRequired,
-    origActorData: PropTypes.object.isRequired,
-    planeCorrection: PropTypes.number.isRequired,
-    innerRectCount: PropTypes.number.isRequired,
-    ticksWhenInvisible: PropTypes.bool.isRequired,
-    curPressed: PropTypes.bool.isRequired,
-    // additional prop types...
-    // new props for the methods added
-    // propTypes for the parameters of the methods added
-  };
-    this.state = {
+  this.state = {
       id: props.id,
       rect: null,
       innerRects: {},
@@ -43,10 +33,21 @@ class EngineActor extends React.Component {
     
     // methods from engine-actors.js converted to React...
     this.addMainInnerRect = function() {
-      // Here goes the actual implementation of addMainInnerRect
+      // actual implementation of addMainInnerRect
+      // replace with actual code
+      this.state.rect = { /* actual code here */ };
+      // For example:
+      // this.state.rect = { width: 100, height: 100 };
     }.bind(this);
     this.addInnerRects = function() {
-      // Here goes the actual implementation of addInnerRects
+      // actual implementation of addInnerRects
+      // replace with actual code
+      this.state.innerRects = { /* actual code here */ };
+      // For example:
+      // this.state.innerRects = { rect1: { width: 50, height: 50 }, rect2: { width: 50, height: 50 } };
+    }.bind(this);
+      // for example:
+      this.state.innerRects = { rect1: { width: 50, height: 50 }, rect2: { width: 50, height: 50 } };
     }.bind(this);
     this.unpressButton = function() {
       // Here goes the actual implementation of unpressButton
@@ -73,6 +74,6 @@ class EngineActor extends React.Component {
       <div className="curPressed" style={{ width: curPressed ? '100%' : '0', height: 'auto' }}></div>
     </div>
   );
-}
-
-export default EngineActor;
+  
+  export default EngineActor;
+  \n
