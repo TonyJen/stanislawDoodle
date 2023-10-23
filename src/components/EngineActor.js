@@ -42,15 +42,10 @@ class EngineActor extends React.Component {
     };
     // methods from engine-actors.js converted to React...
     this.addMainInnerRect = this.addMainInnerRect.bind(this);
-    // correct implementation of addInnerRects
     this.addInnerRects = this.addInnerRects.bind(this);
-    // correct implementation of getRect
     this.getRect = this.getRect.bind(this);
-    // correct implementation of setRender
     this.setRender = this.setRender.bind(this);
-    // correct implementation of setState
     this.setState = this.setState.bind(this);
-    // correct implementation of setVisible
     this.setVisible = this.setVisible.bind(this);
     this.setClickable = this.setClickable.bind(this);
     this.setAttachedToDocumentBody = this.setAttachedToDocumentBody.bind(this);
