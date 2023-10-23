@@ -17,9 +17,7 @@ class EngineActor extends React.Component {
     // methods from engine-actors.js converted to React...
     this.addMainInnerRect = this.addMainInnerRect.bind(this);
     this.addInnerRects = this.addInnerRects.bind(this);
-    addMainInnerRect() {
-    // actual implementation of the method
-    }
+    this.getRect = this.getRect.bind(this);
     this.setRender = this.setRender.bind(this);
     this.setState = this.setState.bind(this);
     this.setVisible = this.setVisible.bind(this);
@@ -83,27 +81,27 @@ class EngineActor extends React.Component {
   // methods from engine-actors.js converted to React...
 
   addMainInnerRect() {
-    // implementation
+    // implemented method from engine-actors.js
   }
 
   addInnerRects(params) {
-    // implementation
+    // implemented method from engine-actors.js
   }
 
   getRect(params) {
-    // implementation
+    // implemented method from engine-actors.js
   }
 
   setRender(params) {
-    // implementation
+    // implemented method from engine-actors.js
   }
 
   setState(params) {
-    // implementation
+    // implemented method from engine-actors.js
   }
 
   setVisible(params) {
-    // implementation
+    // implemented method from engine-actors.js
   }
 
   // other methods...
@@ -121,6 +119,17 @@ EngineActor.propTypes = {
   ticksWhenInvisible: PropTypes.bool.isRequired,
   curPressed: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
+  innerRectCount: PropTypes.number,
+  ticksWhenInvisible: PropTypes.bool,
+  curPressed: PropTypes.bool,
+  // updated propTypes to reflect changes made to state variables and props
+  id: PropTypes.string.isRequired,
+  origActorData: PropTypes.object.isRequired,
+  planeCorrection: PropTypes.number.isRequired,
+  innerRectCount: PropTypes.number.isRequired,
+  ticksWhenInvisible: PropTypes.bool.isRequired,
+  curPressed: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
   // additional prop types...
   // new props for the methods added
   innerRectCount: PropTypes.number,
@@ -131,9 +140,20 @@ EngineActor.propTypes = {
 };
 
 render() {
-  // actual implementation of the render method based on the state of the component
+  const { id, rect, innerRects, origActorData, planeCorrection, innerRectCount, ticksWhenInvisible, curPressed } = this.state;
   return (
-    // actual JSX based on the state of the component
+    <div id={id}>
+      <div className="rect" style={{ rect }}>
+        {innerRects.map((innerRect, index) => (
+          <div key={index} className="innerRect" style={{ innerRect }}></div>
+        ))}
+      </div>
+      <div className="origActorData" style={{ origActorData }}></div>
+      <div className="planeCorrection" style={{ planeCorrection }}></div>
+      <div className="innerRectCount" style={{ innerRectCount }}></div>
+      <div className="ticksWhenInvisible" style={{ ticksWhenInvisible }}></div>
+      <div className="curPressed" style={{ curPressed }}></div>
+    </div>
   );
 }
 
