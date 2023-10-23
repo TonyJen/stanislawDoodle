@@ -10,8 +10,15 @@ class EngineActor extends React.Component {
     ticksWhenInvisible: PropTypes.bool.isRequired,
     curPressed: PropTypes.bool.isRequired,
     // additional prop types...
-    // new props for the methods added
-    // propTypes for the parameters of the methods added
+    update: PropTypes.func.isRequired,
+    onClickableMouseOver: PropTypes.func.isRequired,
+    onClickableMouseOut: PropTypes.func.isRequired,
+    onMouseDown: PropTypes.func.isRequired,
+    onMouseUp: PropTypes.func.isRequired,
+    onMouseClick: PropTypes.func.isRequired,
+    turnIntoButton: PropTypes.func.isRequired,
+    pressButton: PropTypes.func.isRequired,
+    unpressButton: PropTypes.func.isRequired,
   };
     id: PropTypes.string.isRequired,
     origActorData: PropTypes.object.isRequired,
