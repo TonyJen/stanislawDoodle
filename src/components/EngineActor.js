@@ -3,22 +3,13 @@ import PropTypes from 'prop-types';
 
 class EngineActor extends React.Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    curPressed: PropTypes.bool.isRequired,
     origActorData: PropTypes.object.isRequired,
     planeCorrection: PropTypes.number.isRequired,
     innerRectCount: PropTypes.number.isRequired,
     ticksWhenInvisible: PropTypes.bool.isRequired,
     curPressed: PropTypes.bool.isRequired,
     // additional prop types...
-    update: PropTypes.func.isRequired,
-    onClickableMouseOver: PropTypes.func.isRequired,
-    onClickableMouseOut: PropTypes.func.isRequired,
-    onMouseDown: PropTypes.func.isRequired,
-    onMouseUp: PropTypes.func.isRequired,
-    onMouseClick: PropTypes.func.isRequired,
-    turnIntoButton: PropTypes.func.isRequired,
-    pressButton: PropTypes.func.isRequired,
-    unpressButton: PropTypes.func.isRequired,
   };
   this.state = {
       id: props.id,
@@ -33,24 +24,118 @@ class EngineActor extends React.Component {
     
     // methods from engine-actors.js converted to React...
     this.addMainInnerRect = function() {
-      // actual implementation of addMainInnerRect
-      // replace with actual code
-      this.state.rect = { /* actual code here */ };
-      // For example:
-      // this.state.rect = { width: 100, height: 100 };
+      const origActorData = this.state.origActorData;
+      const innerRectsData = {};
+      innerRectsData[engine.MAIN_RECT_ID] = {
+          x: 0, y: 0,
+          width: origActorData.WIDTH, height: origActorData.HEIGHT,
+          clampRotate: origActorData.CLAMP_ROTATE
+      };
+      this.addInnerRects({ innerRectsData: innerRectsData });
     }.bind(this);
-    this.addInnerRects = function() {
-      // actual implementation of addInnerRects
-      // replace with actual code
-      this.state.innerRects = { /* actual code here */ };
-      // For example:
-      // this.state.innerRects = { rect1: { width: 50, height: 50 }, rect2: { width: 50, height: 50 } };
+    this.addInnerRects = function(params) {
+      for (let id in params.innerRectsData) {
+        let innerRectData = params.innerRectsData[id];
+        let innerCount = id === engine.MAIN_RECT_ID ? -1 : this.state.innerRectCount++;
+        this.setState(prevState => {
+          prevState.innerRects[id] = new EngineRect({
+            actor: this, id: this.id,
+            innerId: id,
+            innerCount: innerCount,
+            forceRenderDom: innerRectData.forceRenderDom,
+            horLoopSize: innerRectData.horLoopSize });
+          innerRectData.visible = true;
+          prevState.innerRects[id].transform(innerRectData);
+          return prevState;
+        });
+      }
     }.bind(this);
-      // for example:
-      this.state.innerRects = { rect1: { width: 50, height: 50 }, rect2: { width: 50, height: 50 } };
+    this.unpressButton = function(params) {
+      if (this.state.curPressed) {
+        let speed = engine.BUTTON_UNPRESS_ANIMATION_SPEED;
+        if (engine.features.touch) {
+          speed *= 3;
+        }
+        this.showAnimation({
+          innerId: params.innerId, speed: speed, count: 1,
+          imageIds: params.imageIds });
+      }
     }.bind(this);
-    this.unpressButton = function() {
-      // Here goes the actual implementation of unpressButton
+    this.update = function(params) {
+      this.rect.update();
+      if (params && params.allInnerRects) {
+        for (var i in this.innerRects) {
+          this.innerRects[i].update();
+        }
+      }
+    }.bind(this);
+    this.onClickableMouseOver = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      engine.interaction();
+      if (engine.customMousePointer) {
+        engine.setEmptyCssCursor({ el: event.targetEl });
+        $a('mouse-pointer').setState({ state: 'hover' });
+      } else {
+        event.targetEl.style.cursor = 'pointer';
+      }
+    }.bind(this);
+    this.onClickableMouseOut = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      engine.interaction();
+      if (this.curPressed && event.targetEl.rect.clickableEl.onMouseUpHandler) {
+        event.targetEl.rect.clickableEl.onMouseUpHandler();
+      }
+      this.curPressed = false;
+      if (engine.customMousePointer) {
+        $a('mouse-pointer').setState({ state: 'normal' });
+      }
+    }.bind(this);
+    this.onMouseDown = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      if (event.targetEl.onMouseDownHandler) {
+        engine.interaction({ meaningful: true });
+        event.targetEl.onMouseDownHandler(event);
+      }
+      this.curPressed = true;
+    }.bind(this);
+    this.onMouseUp = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      if (event.targetEl.onMouseUpHandler) {
+        event.targetEl.onMouseUpHandler(event);
+      }
+    }.bind(this);
+    this.onMouseClick = function(e) {
+      var event = engine.getDomEvent({ event: e });
+      if (this.curPressed) {
+        engine.interaction({ meaningful: true });
+        this.onClick({ innerId: event.targetEl.innerId });
+        this.curPressed = false;
+        engine.preventDefaultEvent({ event: event });
+        engine.stopPropagationEvent({ event: event });
+      }
+    }.bind(this);
+    this.turnIntoButton = function(params) {
+      this.setClickable({
+          innerId: params.innerId,
+          clickable: params.clickable,
+          noPadding: params.noPadding,
+          onMouseDown: engine.bind(
+              function() {
+                this.pressButton({ innerId: params.innerId,
+                                   imageIds: params.pressAnimImageIds }) },
+              this),
+          onMouseUp: engine.bind(
+              function() {
+                this.unpressButton({ innerId: params.innerId,
+                                     imageIds: params.unpressAnimImageIds }) },
+              this)
+      });
+    }.bind(this);
+    this.pressButton = function(params) {
+      this.showAnimation({
+        innerId: params.innerId,
+        speed: engine.BUTTON_PRESS_ANIMATION_SPEED, count: 1,
+        imageIds: params.imageIds });
     }.bind(this);
       // implementation...
     }.bind(this);
