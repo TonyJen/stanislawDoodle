@@ -127,13 +127,13 @@ function EngineTransition(params) {
    * to no).
    */
   this.clearOnFinish = !!params.clearOnFinish;
-};
+}
 
 /**
  * Prepare a transition: Make sure we know how long we’re running, what are
  * the start/end values, etc.
  */
-EngineTransition.prototype.prepare = function() {
+EngineTransition.prototype.prepare = function () {
   // ... (code omitted for brevity)
 };
 
@@ -142,7 +142,7 @@ EngineTransition.prototype.prepare = function() {
  * @param {Object} params
  * - {boolean} .lastTick Whether this is a last tick.
  */
-EngineTransition.prototype.tick = function(params) {
+EngineTransition.prototype.tick = function (params) {
   // ... (code omitted for brevity)
 };
 
@@ -151,6 +151,6 @@ EngineTransition.prototype.tick = function(params) {
  * the precise desired transition end value, and we also prepare for another
  * transition run.
  */
-EngineTransition.prototype.lastTick = function() {
+EngineTransition.prototype.lastTick = function () {
   // ... (code omitted for brevity)
 };
