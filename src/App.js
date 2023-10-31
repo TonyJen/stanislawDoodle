@@ -6,6 +6,10 @@ import EngineActor from './components/EngineActor';
 import EngineAction from './components/EngineAction';
 import EngineTransition from './components/EngineTransition';
 import Score from './components/Score';
+<EngineHelpersComponent /> {/* Add this line */}
+=======
+
+<EngineHelpersComponent /> {/* Add this line */}
 import Level from './components/Level';
 
 class App extends React.Component {
