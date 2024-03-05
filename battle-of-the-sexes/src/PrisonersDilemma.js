@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Select, MenuItem, Grid, FormControl, InputLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Box, Container, Button, Select, MenuItem, Grid, FormControl, InputLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 const PrisonersDilemma = () => {
     const [highlight, setHighlight] = useState('');
@@ -22,11 +22,11 @@ const PrisonersDilemma = () => {
     }
 
     return (
-        <Grid container spacing={3}>
-            <Grid item xs={12}>
+        <Container maxWidth="md">
+            <Grid container spacing={3}>
                 <h2>Prisoner's Dilemma</h2>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
                     <InputLabel>Player 1 Strategy</InputLabel>
                     <Select value={player1Strategy} onChange={e => setPlayer1Strategy(e.target.value)}>
@@ -36,7 +36,7 @@ const PrisonersDilemma = () => {
                     </Select>
                 </FormControl>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
                     <InputLabel>Player 2 Strategy</InputLabel>
                     <Select value={player2Strategy} onChange={e => setPlayer2Strategy(e.target.value)}>
@@ -47,7 +47,9 @@ const PrisonersDilemma = () => {
                 </FormControl>
             </Grid>
             <Grid item xs={12}>
-                <Button variant="contained" color="primary" onClick={revealResults}>Reveal Results</Button>
+                <Box mt={2}>
+                    <Button variant="contained" color="primary" onClick={revealResults}>Reveal Results</Button>
+                </Box>
             </Grid>
             <Grid item xs={12}>
                 <TableContainer component={Paper}>
@@ -62,19 +64,19 @@ const PrisonersDilemma = () => {
                         <TableBody>
                             <TableRow>
                                 <TableCell component="th" scope="row">Cooperate</TableCell>
-                                <TableCell style={{backgroundColor: highlight === '(2,2)' ? 'yellow' : ''}}>(2,2)</TableCell>
-                                <TableCell style={{backgroundColor: highlight === '(0,3)' ? 'yellow' : ''}}>(0,3)</TableCell>
+                                <TableCell style={{ backgroundColor: highlight === '(2,2)' ? 'yellow' : '' }}>(2,2)</TableCell>
+                                <TableCell style={{ backgroundColor: highlight === '(0,3)' ? 'yellow' : '' }}>(0,3)</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell component="th" scope="row">Defect</TableCell>
-                                <TableCell style={{backgroundColor: highlight === '(3,0)' ? 'yellow' : ''}}>(3,0)</TableCell>
-                                <TableCell style={{backgroundColor: highlight === '(1,1)' ? 'yellow' : ''}}>(1,1)</TableCell>
+                                <TableCell style={{ backgroundColor: highlight === '(3,0)' ? 'yellow' : '' }}>(3,0)</TableCell>
+                                <TableCell style={{ backgroundColor: highlight === '(1,1)' ? 'yellow' : '' }}>(1,1)</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
             </Grid>
-        </Grid>
+        </Container >
     );
 }
 
