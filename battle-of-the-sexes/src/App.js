@@ -25,7 +25,7 @@ const theme = createTheme({
 const App = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleDrawer = (open) => (event) => {
+    const toggleDrawer = (open) => (event) => { // Handles keyboard events for closing the drawer.
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
